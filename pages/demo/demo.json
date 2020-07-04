@@ -1,0 +1,7 @@
+{
+  "pullRefresh": false,
+  "defaultTitle": "demo",
+  "usingComponents": {
+    "advertise-swiper": "/components/advertise-swiper/advertise-swiper"
+  }
+}

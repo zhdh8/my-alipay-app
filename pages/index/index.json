@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "card": "mini-antui/es/card/index"
+  }
+}

@@ -1,0 +1,18 @@
+<view>
+  <video
+    a:if="{{ show }}"
+    id="video"
+    class="selfClass"
+    src="{{ videoPath }}"
+    show-fullscreen-btn="{{ false }}"
+    show-play-btn="{{ false }}"
+    show-center-play-btn="{{ false }}"
+    show-mute-btn="{{ false }}"
+    enable-progress-gesture="{{ false }}"
+    controls="{{ false }}"
+    loop="{{ false }}"
+    onEnded="onEnded"
+  />
+
+  <image a:if="{{ !show }}" class="selfClass" src="{{ imagePath }}" mode="aspectFit" />
+</view>
