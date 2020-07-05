@@ -12,6 +12,7 @@
     controls="{{ false }}"
     loop="{{ false }}"
     onEnded="onEnded"
+    autoplay="{{true}}"
   />
 
   <image a:if="{{ !show }}" class="selfClass" src="{{ imagePath }}" mode="aspectFit" />

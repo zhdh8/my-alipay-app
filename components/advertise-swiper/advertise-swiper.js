@@ -1,6 +1,6 @@
 const app = getApp()
 const videoContext = my.createVideoContext('video')
-let current = 1
+
 
 Component({
   mixins: [],
@@ -8,22 +8,32 @@ Component({
     videoPath: '',
     imagePath: '',
     show: false,
+    current: 0,
   },
   props: {
-    lists: [],
-    onFetchLists: '',
+    needUpdate: false,
+    list: [],
+    onFetchList: '',
   },
   didMount() {
-    this.props.lists.length && this.play()
+    this.props.list.length && this.play()
   },
-  didUpdate() {
+  didUpdate(preProps) {
+    console.log(this.props.needUpdate)
+    if (preProps.list !== this.props.list) {
+      this.setData({
+        current: 0
+      }, () => {
+        this.props.list.length && this.play()
+      })
+    }
 
   },
   didUnmount() {},
   methods: {
     play () {
 
-      const url = this.props.lists[current - 1]
+      const url = this.props.list[this.data.current]
 
       if (new RegExp('.(jpg|jpeg|png|gif)$').test(url)) {
 
@@ -32,7 +42,7 @@ Component({
           show: false,
         }, async () => {
 
-          await app.sleep(3000)
+          await app.sleep(5000)
 
           this.onEnded()
         })
@@ -42,7 +52,6 @@ Component({
           videoPath: url,
           show: true,
         }, () => {
-
           videoContext.play()
         })
       }
@@ -50,18 +59,16 @@ Component({
     },
 
     onEnded () {
-
-      current = current === this.props.lists.length ? 1 : current + 1
-
-      // 播最后一张时，请求最新的广告列表数据
-      if (current === this.props.lists.length) {
-        this.props.onFetchLists()
-        current = this.props.lists.length
-      }
-
-      console.log(current, this.props.lists.length)
-
-      this.play()
+      console.log('end')
+      this.setData({
+        current: this.data.current + 1
+      }, () => {
+        if (this.data.current === this.props.list.length) {
+          this.props.onFetchList()
+        } else {
+          this.play()
+        }
+      })
     },
   },
 })

@@ -1,1 +1,1 @@
-<advertise-swiper lists="{{videoList}}" onFetchLists="fetchLists" className="demo1"></advertise-swiper>
+<advertise-swiper list="{{videoList}}" onFetchList="fetchList" className="demo1"></advertise-swiper>
